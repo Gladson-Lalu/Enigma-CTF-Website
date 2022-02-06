@@ -1,0 +1,30 @@
+{
+    "name": "tinkerhubaec-ctf",
+    "version": "1.0.0",
+    "description": "Website for QR CODE SCAVENGER HUNT in AEC",
+    "main": "app.js",
+    "scripts": {
+        "start": "node app.js"
+    },
+    "author": "Tinkerhub AEC",
+    "license": "ISC",
+    "dependencies": {
+        "bcrypt": "^5.0.1",
+        "body-parser": "^1.19.0",
+        "cookie-parser": "^1.4.6",
+        "ejs": "^3.1.6",
+        "express": "^4.17.1",
+        "google-spreadsheet": "^3.2.0",
+        "jsonwebtoken": "^8.5.1",
+        "mongoose": "^6.1.0"
+    },
+    "devDependencies": {},
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/TinkerHub-AEC/CTF-Website.git"
+    },
+    "bugs": {
+        "url": "https://github.com/TinkerHub-AEC/CTF-Website/issues"
+    },
+    "homepage": "https://github.com/TinkerHub-AEC/CTF-Website#readme"
+}

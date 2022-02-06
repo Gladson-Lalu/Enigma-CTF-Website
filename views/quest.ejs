@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enigma</title>
+    <link rel="stylesheet" href="css/bootstrap4-neon-glow.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- header incl img , and nav bar alligned column vice -->
+    <header>
+        <div class="navbar-padding">
+            <div class="user">
+                <!-- <img src="image/girldes.png"> -->
+                <h3 class="name">Enigma</h3>
+                <p class="post">
+                    <%= teamName %>
+                </p>
+            </div>
+            <br>
+            <ul class="score">
+                <div class="header-list-element">
+                    <a class="sr teamScore" href="#">Score : <%= score %></a>
+                </div>
+                <div class="header-list-element">
+                    <a class="sr teamLevel" href="#">Level : <%= teamLevel %></a>
+                </div>
+            </ul>
+            <nav class="navbar">
+                <ul>
+                    <li> <a href="/hackerboard.html">Leaderboard</a></li>
+                    <li> <a href="/index.html">Home</a></li>
+                    <li> <a href="/logout">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+
+    </header>
+
+    <!-- menu button when screen reduced , fa ->font awsome -->
+    <div id="menu" class="fas fa-bars"> </div>
+
+    <!-- CTF Section -->
+    <section class="home" id="home">
+
+        <h1 class="heading"><strong>Capture The Flag - ENIGMA</strong></h1>
+        <div class="box-container">
+            <div class="box">
+                <i class="fas fa-flag-checkered"></i>
+                <a href="#"> <span class="flag-tag">CTF-<%= questLevel %></span></a>
+                </p>
+                <% if(imageUrl) {%>
+                    <div class="def"> <img class="allimg" src=images/<%=imageUrl%>></div>
+                    <% } %>
+                        <div class="txt">
+                            <p>
+                                <%= caption %>
+                            </p>
+                        </div>
+                        <% if(pass){%>
+                            <form class="answerForm" action="" method="POST" novalidate>
+                                <div class="form-group">
+                                    <input class="abcd form-control" type="text" placeholder="Type Here" name="answer" required>
+                                    <div class="invalid-feedback hackerFont">
+                                        <h4 id="invalid-answer">answer is empty</h4>
+                                    </div>
+                                </div>
+                                <button class="buton btn btn-outline-danger btn-shadow px-3 my-2 ml-0 ml-sm-1 text-left typewriter" type="submit">Submit </button>
+                            </form>
+
+                            <!-- <p>Status : Partially complete</p> -->
+                            <br>
+                            <div class="collapse show" id="collapseExample">
+                                <div class="card card-body">
+                                    <h4 style="font-size: large;">Next Place to visit</h4>
+                                    <% for(var i = 0 ; i< remainingList.length ;i++){ %>
+                                        <li class="cardList">
+                                            <%= remainingList[i] %>
+                                        </li>
+                                        <% } %>
+
+                                </div>
+                            </div>
+                            <%} %>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- CTF section -->
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+
+            $('#menu').click(function() {
+                $(this).toggleClass('fa-times');
+                $('header').toggleClass('toggle');
+            });
+
+            $(window).on('scroll load', function() {
+                $('#menu').removeClass('fa-times');
+                $('header').removeClass('toggle');
+            });
+
+        });
+
+        var form = document.querySelector('.answerForm');
+        form.addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const answer = form.answer.value;
+            const answerEditText = document.querySelector('.abcd');
+            answerEditText.classList.remove('is-invalid');
+            const answerInvalidFeedback = document.querySelector('#invalid-answer');
+            answerInvalidFeedback.innerHTML = "Answer is empty";
+
+            if (!form.checkValidity() === false) {
+                try {
+                    const res = await fetch(window.location.pathname, {
+                        method: 'POST',
+                        body: JSON.stringify({
+                            answer
+                        }),
+                        headers: {
+                            "Content-Type": 'application/json'
+                        }
+                    });
+                    if (res.status === 400) {
+                        data = await res.json();
+                        answerInvalidFeedback.innerHTML = data.message;
+                        answerEditText.classList.add('is-invalid', 'invalid');
+                    }
+                    if (res.status === 200) {
+                        setInterval((event) => {
+                            window.location.reload(true)
+                        }, 1000);
+                    }
+                } catch (err) {
+                    console.log(err);
+                }
+            }
+            form.classList.add('was-validated');
+        });
+    </script>
+</body>
+
+</html>
