@@ -8,7 +8,7 @@ In computer security, **CTF** (Capture The Flag) is an exercise in deliberately 
 
 We conducted the Enigma CTF to get newcomers and second-year students to know their campus and gain team experience by solving challenges. Several QR codes hid in unnoticeable places on campus. If they scan a QR code, they will receive a riddle, and once the riddle is answered correctly, places to visit next will be shown according to their current level. They have to complete all the challenges at one level to get promoted to the next level..
 
-## [Live Site](https://tinkerhubaec-ctf.herokuapp.com)
+## [Live Site](https://enigmaaec.live)
 
 ## About The Technology
 
