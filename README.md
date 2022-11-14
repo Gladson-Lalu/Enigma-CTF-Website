@@ -1,4 +1,4 @@
-This is the website developed for the _Enigma CTF_, organized by the **Tinkerhub AEC** and the **IEEE AEC** on our campus.
+This is the website developed for the _Enigma CTF_, organized by the **Tinkerhub AEC** on our campus.
 
 ## About CTF
 
